@@ -1,8 +1,8 @@
 /*
  * @Author: mikey.zhaopeng
  * @Date:   2016-07-29 15:57:29
- * @Last Modified by: huangyuan413026@163.com
- * @Last Modified time: 2017-02-28 17:51:49
+ * @Last Modified by: wangzhongning@sogou-inc.com
+ * @Last Modified time: 2017-05-19 21:50:41
  */
 
 var vscode = require('vscode');
@@ -82,10 +82,11 @@ function activate(context) {
                     
                     var line = linetAt.text;
                     line = line.trim();
-                    if (line.startsWith("/*") && !line.endsWith("*/")) {//是否以 /* 开头
+                    //if (line.startsWith("/*") && !line.endsWith("*/")) {//是否以 /* 开头
+                    if (line.startsWith(config.CommentStart) && !line.endsWith(config.CommentEnd)) {
                         comment = true;//表示开始进入注释
                     } else if (comment) {
-                        if (line.endsWith("*/")) {
+                        if (line.endsWith(config.CommentEnd)) {
                             comment = false;//结束注释
                         }
                         var range = linetAt.range;
